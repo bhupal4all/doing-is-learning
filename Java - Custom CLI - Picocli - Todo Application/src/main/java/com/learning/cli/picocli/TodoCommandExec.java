@@ -10,11 +10,17 @@ public class TodoCommandExec {
         System.out.println("\n-----------------\nHelp\n-----------------");
         exitCode = new CommandLine(new TodoCommand()).execute("--help");
 
-        System.out.println("\n-----------------\nVersion\n-----------------");
-        exitCode = new CommandLine(new TodoCommand()).execute("--version");
+        System.out.println("\n-----------------\nList Tasks Help\n-----------------");
+        exitCode = new CommandLine(new TodoCommand()).execute("list", "-h");
 
-        System.out.println("\n-----------------\nOption message\n-----------------");
-        exitCode = new CommandLine(new TodoCommand()).execute("--message=Complete Program");
+        System.out.println("\n-----------------\nList Tasks\n-----------------");
+        exitCode = new CommandLine(new TodoCommand()).execute("list", "--format=default");
+
+        System.out.println("\n-----------------\nList Tasks in Short\n-----------------");
+        exitCode = new CommandLine(new TodoCommand()).execute("add", "--message=" + (Math.random() * 1000));
+
+        System.out.println("\n-----------------\nList Tasks in Short\n-----------------");
+        exitCode = new CommandLine(new TodoCommand()).execute("list", "--format=short");
 
     }
 }

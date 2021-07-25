@@ -26,8 +26,6 @@ public class MapDBApplication {
 
         System.out.println("* * * All Tasks * * *");
         service.getTasks().stream().forEach(System.out::println);
-
-        service.shutdown();
     }
 
 }

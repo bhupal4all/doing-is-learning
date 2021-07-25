@@ -1,5 +1,6 @@
 package com.learning.cli.picocli.command;
 
+import com.learning.cli.picocli.command.sub.*;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
@@ -8,7 +9,16 @@ import java.util.concurrent.Callable;
         name = "todo",
         header = "Todo CLI Application",
         description = "Add/Edit/Delete/List Todo Tasks",
-        version = "0.0.1"
+        version = "0.0.1",
+        commandListHeading = "List of Todo Commands:%n",
+
+        subcommands = {
+                ListTodoCommand.class,
+                AddTodoCommand.class,
+                UpdateTodoCommand.class,
+                DoneTodoCommand.class,
+                DeleteTodoCommand.class
+        }
 )
 public class TodoCommand implements Callable<Integer> {
 
@@ -27,18 +37,12 @@ public class TodoCommand implements Callable<Integer> {
     )
     boolean version;
 
-    @CommandLine.Option(
-            names = {"-m", "--message"},
-            description = "Todo Message",
-            required = true
-    )
-    private String message;
+    public static void main(String[] args) {
+        new CommandLine(new TodoCommand()).execute(args);
+    }
 
     @Override
     public Integer call() throws Exception {
-
-        System.out.println("Adding a Todo with Message.. " + message);
-
         return SUCCESS;
     }
 }

@@ -18,7 +18,7 @@ public class TodoService implements Serializable {
     DB db = null;
     ConcurrentMap<Long, Todo> map = null;
 
-    public TodoService() {
+    public void start() {
         this.db = DBMaker.fileDB(TODO_MAPDB).make();
         this.map = db.hashMap(TODO, Serializer.LONG, Serializer.JAVA).createOrOpen();
     }
@@ -28,16 +28,24 @@ public class TodoService implements Serializable {
     }
 
     public List<Todo> getTasks() {
-        return map.values().stream().collect(Collectors.toList());
+        this.start();
+        List<Todo> collect = map.values().stream().collect(Collectors.toList());
+        this.shutdown();
+        return collect;
     }
 
     public Todo getTaskById(Long taskId) {
-        return map.get(taskId);
+        this.start();
+        Todo todo = map.get(taskId);
+        this.shutdown();
+        return todo;
     }
 
     public Long createTask(String message) {
         Todo task = new Todo(message);
+        this.start();
         map.put(task.getId(), task);
+        this.shutdown();
         return task.getId();
     }
 
@@ -45,13 +53,17 @@ public class TodoService implements Serializable {
         Todo task = getTaskById(taskId);
         if (Objects.nonNull(task)) {
             task.setMessage(message);
+            this.start();
             map.put(task.getId(), task);
+            this.shutdown();
         }
         return true;
     }
 
     public boolean deleteTask(Long taskId) {
+        this.start();
         map.remove(taskId);
+        this.shutdown();
         return true;
     }
 
@@ -60,7 +72,9 @@ public class TodoService implements Serializable {
         if (Objects.nonNull(task)) {
             task.setDone(true);
             task.setCompletedOn(new Date());
+            this.start();
             map.put(task.getId(), task);
+            this.shutdown();
         }
         return true;
     }
