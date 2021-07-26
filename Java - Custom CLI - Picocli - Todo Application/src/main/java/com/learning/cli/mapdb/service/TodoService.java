@@ -34,6 +34,15 @@ public class TodoService implements Serializable {
         return collect;
     }
 
+    public List<Todo> getTasks(boolean isDone) {
+        this.start();
+        List<Todo> collect = map.values().stream()
+                .filter(todo -> todo.isDone() == isDone)
+                .collect(Collectors.toList());
+        this.shutdown();
+        return collect;
+    }
+
     public Todo getTaskById(Long taskId) {
         this.start();
         Todo todo = map.get(taskId);

@@ -9,7 +9,6 @@ import java.util.concurrent.Callable;
 
 @CommandLine.Command(
         name = "done",
-        aliases = {"complete"},
         header = "Todo Completed",
         description = "Update Task as Completed",
         version = "0.0.1"
