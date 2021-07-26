@@ -9,9 +9,11 @@ import java.util.concurrent.Callable;
         name = "todo",
         header = "Todo CLI Application",
         description = "Add/Edit/Delete/List Todo Tasks",
-        version = "0.0.1",
+        version = "Version: 0.0.1",
         commandListHeading = "List of Todo Commands:%n",
-
+        optionListHeading = "%nOptions:%n",
+        mixinStandardHelpOptions = true,
+        subcommandsRepeatable = true,
         subcommands = {
                 ListTodoCommand.class,
                 AddTodoCommand.class,
@@ -23,19 +25,6 @@ import java.util.concurrent.Callable;
 public class TodoCommand implements Callable<Integer> {
 
     public static final int SUCCESS = 0;
-
-    @CommandLine.Option(
-            names = {"-h", "--help"},
-            usageHelp = true
-    )
-    boolean help;
-
-    @CommandLine.Option(
-            names = {"-V", "--version"},
-            versionHelp = true,
-            description = "print version information and exit"
-    )
-    boolean version;
 
     public static void main(String[] args) {
         new CommandLine(new TodoCommand()).execute(args);

@@ -11,24 +11,14 @@ import java.util.concurrent.Callable;
         name = "done",
         header = "Todo Completed",
         description = "Update Task as Completed",
-        version = "0.0.1"
+        optionListHeading = "%nOptions:%n",
+        version = "Todo Done Version: 0.0.1",
+        mixinStandardHelpOptions = true,
+        requiredOptionMarker = '*'
 )
 public class DoneTodoCommand implements Callable<Integer> {
     public static final int SUCCESS = 0;
     TodoService service = null;
-
-    @CommandLine.Option(
-            names = {"-h", "--help"},
-            usageHelp = true
-    )
-    boolean help;
-
-    @CommandLine.Option(
-            names = {"-V", "--version"},
-            versionHelp = true,
-            description = "print version information and exit"
-    )
-    boolean version;
 
     @CommandLine.Option(
             names = {"--id"},

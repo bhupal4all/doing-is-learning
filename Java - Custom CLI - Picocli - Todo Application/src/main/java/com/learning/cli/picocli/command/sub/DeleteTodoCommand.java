@@ -12,24 +12,14 @@ import java.util.concurrent.Callable;
         aliases = {"remove"},
         header = "Delete Todo",
         description = "Deleting Todo From the List",
-        version = "0.0.1"
+        optionListHeading = "%nOptions:%n",
+        version = "Todo Delete Version: 0.0.1",
+        mixinStandardHelpOptions = true,
+        requiredOptionMarker = '*'
 )
 public class DeleteTodoCommand implements Callable<Integer> {
     public static final int SUCCESS = 0;
     TodoService service;
-
-    @CommandLine.Option(
-            names = {"-h", "--help"},
-            usageHelp = true
-    )
-    boolean help;
-
-    @CommandLine.Option(
-            names = {"-V", "--version"},
-            versionHelp = true,
-            description = "print version information and exit"
-    )
-    boolean version;
 
     @CommandLine.Option(
             names = {"--id"},
