@@ -16,7 +16,6 @@ public class Todo implements Serializable {
     }
 
     public Todo(String message) {
-        this.id = Math.round(Math.random()*1000);
         this.message = message;
     }
 
