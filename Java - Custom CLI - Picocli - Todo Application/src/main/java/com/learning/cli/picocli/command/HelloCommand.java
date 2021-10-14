@@ -32,6 +32,10 @@ public class HelloCommand implements Callable<Integer> {
     )
     String user;
 
+    public static void main(String[] args) {
+        new CommandLine(new HelloCommand()).execute(args);
+    }
+
     @Override
     public Integer call() throws Exception {
         System.out.println("Welcome " + user);

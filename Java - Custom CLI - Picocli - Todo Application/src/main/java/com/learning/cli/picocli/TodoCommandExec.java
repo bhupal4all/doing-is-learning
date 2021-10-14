@@ -7,9 +7,9 @@ public class TodoCommandExec {
     public static void main(String[] args) {
         int exitCode = -1;
 
-//        System.out.println("\n-----------------\nHelp\n-----------------");
-//        exitCode = new CommandLine(new TodoCommand()).execute("--help");
-//
+        System.out.println("\n-----------------\nHelp\n-----------------");
+        exitCode = new CommandLine(new TodoCommand()).execute("--help");
+
 //        System.out.println("\n-----------------\nList Tasks Help\n-----------------");
 //        exitCode = new CommandLine(new TodoCommand()).execute("list", "-h");
 //
